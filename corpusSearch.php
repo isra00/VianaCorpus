@@ -7,7 +7,7 @@ if (empty($_POST)) {
 	goto view;
 }
 
-$conn = new mysqli("localhost", "root", "root", "VianaCorpus");
+$conn = new mysqli("localhost", "isra", "isra", "VianaCorpus");
 $conn->set_charset('utf8');
 
 $search = $_POST['search'];
