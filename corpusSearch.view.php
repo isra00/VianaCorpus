@@ -1,9 +1,11 @@
+<!doctype html>
+<html>
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Search: <?php echo $search ?? '' ?></title>
+	<title><?php echo !empty($search) ? 'Search: ' . htmlentities($search) : 'Viana Translated Swahili Corpus' ?></title>
 	<style>
 	body {
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -89,6 +91,12 @@
 			.resultItem .text-lines td .not-translated {
 				color: gray;
 			}
+
+		footer {
+			color: #555;
+			margin: 2em 0 .5em;
+			border-top: 3px solid #e1e1e1;
+		}
 	</style>
 </head>
 <body>
@@ -150,5 +158,10 @@
 		</ol>
 		<?php endif ?>
 	</article>
+
+	<footer>
+		<h3>What is this?</h3>
+		<p>The <strong>Viana Translated Swahili Corpus</strong> is a collection of texts translated into Swahili from different original languages by trusted translators. It allows you to look for <em>actual</em> translations of the words you need.</p>
+	</footer>
 </body>
 </html>
