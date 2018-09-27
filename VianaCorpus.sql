@@ -31,7 +31,7 @@ CREATE TABLE `document` (
   `publish_month` tinyint(2) unsigned DEFAULT NULL,
   `publish_day` tinyint(2) unsigned DEFAULT NULL,
   PRIMARY KEY (`id_document`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1794,4 +1794,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-26 21:06:00
+-- Dump completed on 2018-09-27 15:18:11
