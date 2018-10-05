@@ -3,12 +3,17 @@
 //error_reporting(E_ERROR);
 ini_set("display_errors" , true);
 
+$conn = new mysqli("localhost", "isra", "isra", "VianaCorpus");
+$conn->set_charset('utf8');
+
+$stmtCountDocuments = $conn->query('SELECT COUNT(*) as docs FROM document');
+$totalDocs = $stmtCountDocuments->fetch_assoc()['docs'];
+$stmtCountLangs = $conn->query('SELECT COUNT(DISTINCT id_lang) langs FROM textline');
+$totalLangs = $stmtCountLangs->fetch_assoc()['langs'];
+
 if (empty($_POST)) {
 	goto view;
 }
-
-$conn = new mysqli("localhost", "isra", "isra", "VianaCorpus");
-$conn->set_charset('utf8');
 
 $search = $_POST['search'];
 

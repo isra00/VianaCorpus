@@ -161,7 +161,7 @@
 
 	<footer>
 		<h3>What is this?</h3>
-		<p>The <strong>Viana Translated Swahili Corpus</strong> is a collection of texts translated into Swahili from different original languages by trusted translators. It allows you to look for <em>actual</em> translations of the words you need.</p>
+		<p>The <strong>Viana Translated Swahili Corpus</strong> is a collection of trusted translations into Swahili of <?php echo $totalDocs ?> texts in <?php echo $totalLangs ?> different languages. It allows you to look for <em>actual</em> translations of the words you need.</p>
 	</footer>
 </body>
 </html>
