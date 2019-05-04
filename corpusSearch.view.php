@@ -9,7 +9,7 @@
 	<style>
 	body {
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		line-height: 125%;
+		line-height: 130%;
 		color: #333;
 	}
 	.main {
@@ -126,7 +126,7 @@
 
 				<ul class="metadata">
 					<li>Author: <?php echo $result['metadata']['author'] ?></li>
-					<li>Original language: <?php echo $allLanguages[$result['metadata']['id_lang_original']]['name'] ?></li>
+					<?php if (!empty($result['metadata']['id_lang_original'])) : ?><li>Original language: <?php echo $allLanguages[$result['metadata']['id_lang_original']]['name'] ?></li><?php endif ?>
 				</ul>
 				
 				<table class="text-lines">
@@ -161,7 +161,7 @@
 
 	<footer>
 		<h3>What is this?</h3>
-		<p>The <strong>Viana Translated Swahili Corpus</strong> is a collection of trusted translations into Swahili of <?php echo $totalDocs ?> texts in <?php echo $totalLangs ?> different languages. It allows you to look for <em>actual</em> translations of the words you need.</p>
+		<p>The <strong>Translated Catholic Swahili Corpus</strong> is a tool for comparing translations of texts from the Magisterium of the Catholic Church into Swahili, with <?php echo $totalDocs ?> texts in <?php echo $totalLangs ?> different languages. It allows you to look for <em>actual</em> translations of the words you need.</p>
 	</footer>
 </body>
 </html>
