@@ -16,18 +16,69 @@
 		max-width: 100%;
 		margin: 0 auto;
 	}
+	.page-home .main,
+	.page-home footer {
+		max-width: 40rem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	header {
+		text-align: center;
+		margin: 1em 0;
+	}
+
 	h1 {
 		font-size: 1.5em;
 		font-weight: normal;
 		line-height: 135%;
+		text-align: center;
+		margin-top: 0;
 	}
-		h1 form {
-			display: inline-block;
-			margin: 0;
+	.page-results h1 {
+		display: inline;
+	}
+
+	.main form {
+		display: inline-block;
+		width: auto;
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	form label {
+		display: block;
+		color: gray;
+		margin-bottom: .5em;
+	}
+
+	form input,
+	form button {
+		font-size: 1.1em;
+		padding: .1em .2em;
+	}
+
+	form button {
+		padding: .1em .4em;
+		color: #555;
+	}
+
+
+	.tip {
+	    display: block;
+    	background: #fff4dc;
+    	border-radius: .3em;
+    	padding: .1em .3em;
+    	margin-top: 1em;
+    	max-width: 25em;
+	}
+		.page-results .tip {
+			display: none;
 		}
+
 	.searchResults {
 		list-style: none;
-		margin: 0;
+		margin: 2em 0 0;
 		padding: 0;
 	}
 	.resultItem {
@@ -94,26 +145,32 @@
 
 		footer {
 			color: #555;
-			margin: 2em 0 .5em;
+			margin: 4% 0 .5em;
 			border-top: 3px solid #e1e1e1;
 		}
 	</style>
 </head>
-<body>
+<body class="<?php echo (empty($_POST)) ? 'page-home' : 'page-results' ?>">
+
 	<article class="main">
 
-		<h1>
-			<?php if (empty($_POST)) : ?>
-			Search the Viana Translated Swahili Corpus: 
-			<?php else : ?>
-			<strong><?php echo $totalOcurrences ?> ocurrences in <?php echo count($linesByDoc) ?> texts</strong> 
-			for 
-			<?php endif ?>
+		<header>
+			<h1>
+				<?php if (empty($_POST)) : ?>
+				Viana Translated Swahili Corpus
+				<?php else : ?>
+				<strong><?php echo $totalOcurrences ?> ocurrences in <?php echo count($linesByDoc) ?> texts</strong> 
+				for 
+				<?php endif ?>
+			</h1>
+
 			<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
-				<input name="search" value="<?php echo $search ?? '' ?>" autofocus>
-				<button type="submit" name="sent">&#128269;</button>
+				<?php if (empty($_POST)) : ?><label for="search">Search in <?php echo $availableLangs ?>:</label><?php endif ?>
+				<input id="search" name="search" value="<?php echo $search ?? '' ?>" autofocus>
+				<button type="submit" name="sent">&#128269; Search</button>
+				<small class="tip">💡 PRO TIP: Try searching in different languages, since not all documents are available in all languages!</small>
 			</form>
-		</h1>
+		</header>
 		
 		<?php if (!empty($linesByDoc)) : ?>
 		<ol class="searchResults">
@@ -161,7 +218,7 @@
 
 	<footer>
 		<h3>What is this?</h3>
-		<p>The <strong>Translated Catholic Swahili Corpus</strong> is a tool for comparing translations of texts from the Magisterium of the Catholic Church into Swahili, with <?php echo $totalDocs ?> texts in <?php echo $totalLangs ?> different languages. It allows you to look for <em>actual</em> translations of the words you need.</p>
+		<p>The <strong>Viana Translated Swahili Corpus</strong> is a tool for comparing translations of texts from the Magisterium of the Catholic Church into Swahili, with <?php echo $totalDocs ?> texts in <?php echo $totalLangs ?> different languages. It allows you to look for <em>actual</em> translations of the words you need.</p>
 	</footer>
 </body>
 </html>

@@ -11,6 +11,16 @@ $totalDocs = $stmtCountDocuments->fetch_assoc()['docs'];
 $stmtCountLangs = $conn->query('SELECT COUNT(DISTINCT id_lang) langs FROM textline');
 $totalLangs = $stmtCountLangs->fetch_assoc()['langs'];
 
+$stmtAvailableLangs = $conn->query('SELECT DISTINCT id_lang, name FROM `textline` JOIN lang USING (id_lang) LIMIT 50');
+$availableLangs = [];
+while ($lang = $stmtAvailableLangs->fetch_assoc())
+{
+	$availableLangs[] = $lang['name'];
+}
+
+$lastLang = array_pop($availableLangs);
+$availableLangs = join($availableLangs, ', ') . ' or ' . $lastLang;
+
 if (empty($_POST)) {
 	goto view;
 }
