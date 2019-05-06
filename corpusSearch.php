@@ -92,10 +92,59 @@ while ($docsRow = $stmt->fetch_assoc())
 
 	foreach ($linesByDoc[$docsRow['id_document']]['lines'] as &$translations)
 	{
-		foreach ($translations as &$translatedLine)
+		$sentenceCount = [];
+
+		$highlightedLanguage = null;
+
+		//Split paragraphs into sentences.
+		foreach ($translations as $translatedLineIndex => &$translatedLine)
 		{
 			//Operations for the interface
-			$translatedLine = preg_replace("/($search)/i", "<em>$1</em>", $translatedLine);
+			$translatedLine = preg_replace("/($search)/i", "<em>$1</em>", $translatedLine, -1, $highlighted);
+
+			//Only the first language to be highlighted (yes, this is a bit problematic)
+			if ($highlighted && empty($highlightedLanguage))
+			{
+				$highlightedLanguage = $translatedLineIndex;
+			}
+
+			/** @see https://stackoverflow.com/questions/16377437/split-a-text-into-sentences */
+			// For better sentence splitting, try http://php-nlp-tools.com/documentation/
+			$translatedLine = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', $translatedLine);
+		}
+
+		// If all languages have same number of sentences, highlight the matching
+		// sentence in all languages
+		if ($highlightedLanguage)
+		{
+			$highlightedSentences = [];
+			foreach ($translations[$highlightedLanguage] as $i => &$sentence)
+			{
+				if (false !== strpos($sentence, '<em>'))
+				{
+					$sentence = "<strong>$sentence</strong>";
+					$highlightedSentences[] = $i;
+				}
+			}
+
+			foreach ($translations as $index => &$translation)
+			{
+				if (count($translation) != count($translations[$highlightedLanguage])
+					|| $index == $highlightedLanguage) {
+					continue;
+				}
+
+				foreach ($highlightedSentences as $highlightedSentenceIndex)
+				{
+					$translation[$highlightedSentenceIndex] = "<strong>" . $translation[$highlightedSentenceIndex] . "</strong>";
+				}
+			}
+		}
+
+		foreach ($translations as &$trans)
+		{
+			//Re-join sentences into paragraphs after highlighting affected sentences
+			$trans = join($trans, ' ');
 		}
 	}
 

@@ -130,7 +130,12 @@
 			font-size: .9em;
 			background: #f8f8f8;
 			line-height: 125%;
+			color: #444;
 		}
+			.resultItem .text-lines td strong {
+				color: black;
+				font-weight: normal;
+			}
 		.resultItem .text-lines td:first-child {
 			border-left: none;
 		}
