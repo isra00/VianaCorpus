@@ -7,6 +7,15 @@
 
 	<title><?php echo !empty($search) ? 'Search: ' . htmlentities($search) : 'Viana Translated Swahili Corpus' ?></title>
 	<style>
+	/* Palette "Japanese Garden" from Kuler
+
+	Sand 		#d8caa8
+	Light green #5c832f
+	Dark green 	#284907
+	Brown 		#382513
+	Gray		#363942
+	*/
+
 	body {
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 		line-height: 130%;
@@ -71,6 +80,7 @@
     	padding: .1em .3em;
     	margin-top: 1em;
     	max-width: 25em;
+    	color: #444;
 	}
 		.page-results .tip {
 			display: none;
@@ -91,8 +101,8 @@
 		}
 		.resultItem h2 date {
 			font-size: .7em;
-			color: gray;
-			border: 1px solid gray;
+			color: #5c832f;
+			border: 1px solid #5c832f;
 			border-radius: .2em;
 			padding: .1em .2em;
 		}
@@ -111,10 +121,10 @@
 			padding-bottom: .5em;
 			border: none;
 			text-align: left;
-			border-bottom: 2px solid #888;
+			border-bottom: 2px solid #5c832f;
 		}
 			.resultItem .text-lines th .original {
-				background: #60e860;
+				background: #5c832f;
 				color: white;
 				border-radius: .3em;
 				padding: .2em .3em;
@@ -152,16 +162,17 @@
 			color: #555;
 			margin: 4% 0 .5em;
 			border-top: 3px solid #e1e1e1;
+			font-size: .9em;
 		}
 	</style>
 </head>
-<body class="<?php echo (empty($_POST)) ? 'page-home' : 'page-results' ?>">
+<body class="<?php echo (empty($_GET['search'])) ? 'page-home' : 'page-results' ?>">
 
 	<article class="main">
 
 		<header>
 			<h1>
-				<?php if (empty($_POST)) : ?>
+				<?php if (empty($_GET['search'])) : ?>
 				Viana Translated Swahili Corpus
 				<?php else : ?>
 				<strong><?php echo $totalOcurrences ?> ocurrences in <?php echo count($linesByDoc) ?> texts</strong> 
@@ -169,11 +180,11 @@
 				<?php endif ?>
 			</h1>
 
-			<form method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
-				<?php if (empty($_POST)) : ?><label for="search">Search in <?php echo $availableLangs ?>:</label><?php endif ?>
+			<form method="get" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+				<?php if (empty($_GET['search'])) : ?><label for="search">Search in <?php echo $availableLangs ?>:</label><?php endif ?>
 				<input id="search" name="search" value="<?php echo $search ?? '' ?>" autofocus>
 				<button type="submit" name="sent">&#128269; Search</button>
-				<small class="tip">💡 PRO TIP: Try searching in different languages, since not all documents are available in all languages!</small>
+				<small class="tip">💡 <strong>PRO TIP</strong>: Try searching in different languages, since not all documents are available in all languages!</small>
 			</form>
 		</header>
 		

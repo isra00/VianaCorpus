@@ -21,11 +21,11 @@ while ($lang = $stmtAvailableLangs->fetch_assoc())
 $lastLang = array_pop($availableLangs);
 $availableLangs = join($availableLangs, ', ') . ' or ' . $lastLang;
 
-if (empty($_POST)) {
+if (empty($_GET['search'])) {
 	goto view;
 }
 
-$search = $_POST['search'];
+$search = $_GET['search'];
 
 // Simply get lines with the search string
 
@@ -110,7 +110,7 @@ while ($docsRow = $stmt->fetch_assoc())
 
 			/** @see https://stackoverflow.com/questions/16377437/split-a-text-into-sentences */
 			// For better sentence splitting, try http://php-nlp-tools.com/documentation/
-			$translatedLine = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', $translatedLine);
+			$translatedLine = preg_split('/(?<=[.?!“”])\s+(?=[a-z])/i', $translatedLine);
 		}
 
 		// If all languages have same number of sentences, highlight the matching
